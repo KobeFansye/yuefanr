@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>约饭儿</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/regiser.css" rel="stylesheet">
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-3.2.1.js"></script>
+  </head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-4 box">
+				<div class="header">
+					<img src="img/logo.png" />
+				</div>
+				<div class="phone">
+					<article class="aaa">
+						<a href="#" >手机注册</a>
+					</article>
+					<article class="ph-right">
+						<a href="#">微信注册</a>
+					</article>
+				</div>
+			        <form id="form">
+						<div class="main-a">
+							<input type="text" id="ipu1" placeholder="手机号码" />
+							<span id="taa"></span>
+						</div>
+						<div class="main-b">
+							<input type="password" id="ipu2" placeholder="请输入密码" />
+							<span id="tab"></span>
+						</div>
+						<div class="main-c">
+							<input type="password" id="ipu3" placeholder="请再次请输入密码" />
+						</div>
+						<div class="main-d">
+							<a type="button" id="button" class="btn btn-warning btn-lg btn-block">注册</a>
+						</div>
+				   </form>
+		</div>
+	</div>
+</div>
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-lg-offset-3">
+					<span class="iit">版权所有：未来科技有限公司</span>
+			   </div>
+			</div>
+			<div class="container">
+				     <p class="iiit">增值电信业务许可证 : 沪B2-20150033 | 沪ICP备 09007032 | 上海工商行政管理 Copyright ©2008-2017 上海拉扎斯信息科技有限公司, All Rights Reserved.</p>
+			    </div>
+		</div>
+	</footer>
+	
+	<script type="text/javascript">
+	$(function () {
+    $('#button').on('click', function () {
+      $.ajax({
+        url: 'user',
+        type: 'post',
+        data: $('#form').serialize(),
+        dataType: 'json',
+        success: function (data) {
+          if (data.message == 'ERROR') {
+            alert(data.error)
+          } else if (data.message == 'OK') {
+            window.location.href = 'index'
+          }
+        }
+      })
+    })
+  })
+  </script>
+  
+  <script type="text/javascript">
+
+			function a(){
+			    var mouse = document.getElementById("ipu1").value;
+			    if (mouse.length<=6)
+			{
+			      alert("提示");
+			      window.location.href='/';
+			}
+			    else{
+			     $.ajax(
+			{
+			        url:'chak',
+			        data:{user:$('#ipu1').val()},
+				    type:'post',
+				    dataType:'json',
+				    success:function(response,status,xhr){
+							if(response.yes =='ok'){
+							$('#taa').text('用户名正确')}
+							
+							else{
+							$('#taa').text('用户名错误')
+							
+							}
+							}
+			
+			           }
+			   )	}
+			}
+			
+			function b(){
+			var mouse = document.getElementById("ipu2").value;
+			var mouse1 =document.getElementById("ipu3").value;
+			if (mouse==mouse1)
+			{
+			$('#tab').text('密码正确');
+			}
+			else{
+			
+			$('#tab').text('密码两次输入不同');
+			    window.location.href='/';
+			}
+			}
+
+</script>
+  
+	
+</body>
+</html>
